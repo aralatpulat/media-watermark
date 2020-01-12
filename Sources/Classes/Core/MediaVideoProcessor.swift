@@ -16,8 +16,6 @@ let kMediaContentTimeScale: Int32 = 30
 
 extension MediaProcessor {
     func processVideoWithElements(item: MediaItem, itemId: String?, completion: @escaping ProcessCompletionHandler) {
-        guard let itemId = itemId else { return }
-
         let mixComposition = AVMutableComposition()
         let compositionVideoTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
         let clipVideoTrack = item.sourceAsset.tracks(withMediaType: AVMediaType.video).first
@@ -108,9 +106,12 @@ extension MediaProcessor {
         }
     }
     
-    private func processedMoviePath(itemId: String) -> URL {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/\(itemId).mov"
-        return URL(fileURLWithPath: documentsPath)
+    private func processedMoviePath(itemId: String?) -> URL {
+        let documentsPathBase = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        guard let itemId = itemId else {
+            return URL(fileURLWithPath: documentsPathBase + kProcessedTemporaryVideoFileName)
+        }
+        return URL(fileURLWithPath: documentsPathBase + "/\(itemId).mov")
     }
     
     private func clearTemporaryData(url: URL, completion: ProcessCompletionHandler!) {
