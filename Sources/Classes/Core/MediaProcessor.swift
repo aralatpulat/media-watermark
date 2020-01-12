@@ -14,7 +14,8 @@ public class MediaProcessor {
     public init() {}
     
     // MARK: - process elements
-    public func processElements(item: MediaItem, completion: @escaping ProcessCompletionHandler) {
-        item.type == .video ? processVideoWithElements(item: item, completion: completion) : processImageWithElements(item: item, completion: completion)
+    public func processElements(item: MediaItem, itemId: String?, completion: @escaping ProcessCompletionHandler) {
+        item.type == .video ? processVideoWithElements(item: item, itemId: itemId, completion: completion) : processImageWithElements(item: item, completion: completion)
+
     }
 }
