@@ -41,14 +41,6 @@ CocoaPods: for iOS
 Processing Concept: GPU & CPU
 
 
-if version < 0.4:
-
-iOS: 9.0+  
-Swift: 4.0  
-CocoaPods: for iOS  
-Processing Concept: GPU & CPU
-
-
 ## Example
 To run the example project, clone the repo, and run pod install from the Example directory first.
 
